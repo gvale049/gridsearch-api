@@ -102,8 +102,9 @@ public class GridServices {
 
         public Direction getDirectionForFit (char[][] content, Coordinate coordinate, String word) {
             List<Direction> directions = Arrays.asList(Direction.values());
-            Collections.shuffle(directions);
+
             for (Direction direction : directions) {
+                Collections.shuffle(directions);
                 if (doesFit(content, word, coordinate, direction)) {
                     return direction;
                 }
@@ -118,7 +119,8 @@ public class GridServices {
                     if (coordinate.x + word.length() > GRID_SIZE)
                         return false;
                     for (int i = 0; i < word.length(); i++) {
-                        if (content[coordinate.x + i][coordinate.y] != '_')
+                        char letter = content[coordinate.x + i][coordinate.y];
+                        if (letter != '_' && letter != word.charAt(i))
                             return false;
                     }
                 }
@@ -126,7 +128,8 @@ public class GridServices {
                     if (coordinate.y + word.length() > GRID_SIZE)
                         return false;
                     for (int i = 0; i < word.length(); i++) {
-                        if (content[coordinate.x][coordinate.y + i] != '_')
+                        char letter = content[coordinate.x][coordinate.y + i];
+                        if ( letter != '_' && letter != word.charAt(i))
                             return false;
                     }
                 }
@@ -134,7 +137,8 @@ public class GridServices {
                     if ((coordinate.x + word.length() > GRID_SIZE) || (coordinate.y + word.length() > GRID_SIZE))
                         return false;
                     for (int i = 0; i < word.length(); i++) {
-                        if (content[coordinate.x + i][coordinate.y + i] != '_')
+                        char letter = content[coordinate.x + i][coordinate.y + i];
+                        if (letter != '_' && letter != word.charAt(i))
                             return false;
                     }
                 }
@@ -142,7 +146,8 @@ public class GridServices {
                     if (coordinate.x < word.length())
                         return false;
                     for (int i = 0; i < word.length(); i++) {
-                        if (content[coordinate.x - i][coordinate.y] != '_')
+                        char letter = content[coordinate.x - i][coordinate.y];
+                        if (letter != '_' && letter != word.charAt(i))
                             return false;
                     }
                 }
@@ -150,7 +155,8 @@ public class GridServices {
                     if (coordinate.y < word.length())
                         return false;
                     for (int i = 0; i < word.length(); i++) {
-                        if (content[coordinate.x][coordinate.y - i] != '_')
+                        char letter = content[coordinate.x][coordinate.y - i];
+                        if (letter != '_' && letter != word.charAt(i))
                             return false;
                     }
                 }
@@ -158,7 +164,8 @@ public class GridServices {
                     if ((coordinate.x < word.length()) || (coordinate.y < word.length()))
                         return false;
                     for (int i = 0; i < word.length(); i++) {
-                        if (content[coordinate.x - i][coordinate.y - i] != '_')
+                        char letter = content[coordinate.x - i][coordinate.y - i];
+                        if (letter != '_' && letter != word.charAt(i))
                             return false;
                     }
                 }
@@ -168,7 +175,7 @@ public class GridServices {
 
         private void randomFillGrid(char[][] content) {
             int GRID_SIZE = content[0].length;
-            String allLeters = "abcdefghijklmnopqstuvxywz";
+            String allLeters = "ABCDEFGHIJKLMNOPQRSTUVXYWZ";
 
             for (int i = 0; i < GRID_SIZE; i++) {
                 for (int j = 0; j < GRID_SIZE; j++) {
